@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "91332052400",
+    "firebase_url": "https://restaurantroulette-678b6.firebaseio.com",
+    "project_id": "restaurantroulette-678b6",
+    "storage_bucket": "restaurantroulette-678b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91332052400:android:09c212cfdc4edb81",
+        "android_client_info": {
+          "package_name": "com.example.sauhardpant.restaurantroulette"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91332052400-54q2dob8rn6icp3fdng6ssmh7de3iibn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk98EvrsGxZjzqhV5VpHHU5X92dYG5c9Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
