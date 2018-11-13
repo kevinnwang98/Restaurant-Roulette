@@ -1,5 +1,7 @@
 package com.example.sauhardpant.restaurantroulette.ui;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.sauhardpant.restaurantroulette.R;
+import com.example.sauhardpant.restaurantroulette.ViewModel.LoginViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,8 +21,10 @@ import butterknife.ButterKnife;
 public class LoginFragment extends Fragment {
     @BindView(R.id.btn_login)
     Button loginButton;
-    @BindView(R.id.btn_signUp)
+    @BindView(R.id.btn_signup_link)
     Button signUpButton;
+
+    LoginViewModel viewModel;
 
     public LoginFragment() {
     }
@@ -29,6 +34,8 @@ public class LoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         ButterKnife.bind(this, rootView);
+
+        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
