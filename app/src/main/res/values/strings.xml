@@ -10,4 +10,7 @@
     <string name="already_a_member_login">Already a member? Login</string>
     <string name="sign_up_fail">Could not register user.</string>
     <string name="login_failed">Sign in failed. Please try again.</string>
+    <string name="food">Eat</string>
+    <string name="drinks">Drink</string>
+    <string name="explore">Explore</string>
 </resources>

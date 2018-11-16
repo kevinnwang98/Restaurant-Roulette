@@ -9,13 +9,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import com.example.sauhardpant.restaurantroulette.R;
 import com.example.sauhardpant.restaurantroulette.ViewModel.LoginViewModel;
@@ -93,7 +93,12 @@ public class LoginFragment extends Fragment {
             @Override
             public void onChanged(@Nullable Boolean loggedIn) {
                 if (loggedIn != null && loggedIn) {
-                    // show new screen
+                    if (getActivity() != null) {
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_fragment_container, new BaseResultsFragment())
+                                .commit();
+                    }
                 } else {
                     Snackbar.make(linearLayout,
                             R.string.login_failed,
@@ -104,16 +109,18 @@ public class LoginFragment extends Fragment {
     }
 
     private boolean validateForm() {
-        boolean isValid = true;
+        boolean valid = true;
 
-        if (etEmail.getText().toString().isEmpty()) {
-            isValid = false;
+        if (TextUtils.isEmpty(etEmail.getText().toString())) {
+            etEmail.setError("Email cannot be empty");
+            valid = false;
+        }
+        if (TextUtils.isEmpty(etPassword.getText().toString())) {
+            etPassword.setError("Password needs to be at least 6 characters long");
+            valid = false;
+
         }
 
-        if (etPassword.getText().toString().isEmpty()) {
-            isValid = false;
-        }
-
-        return isValid;
+        return valid;
     }
 }

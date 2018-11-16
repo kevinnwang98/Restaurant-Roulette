@@ -128,7 +128,12 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onChanged(@Nullable Boolean signedIn) {
                 if (signedIn != null && signedIn) {
-                    // navigate to different screen
+                    if (getActivity() != null) {
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_fragment_container, new BaseResultsFragment())
+                                .commit();
+                    }
                 } else {
                     if (numOfSignUpAttempts == 0) {
                         Snackbar.make(linearLayout,
