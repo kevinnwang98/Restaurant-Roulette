@@ -5,6 +5,7 @@
 
     <LinearLayout
         android:orientation="vertical"
+        android:id="@+id/login_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="56dp"

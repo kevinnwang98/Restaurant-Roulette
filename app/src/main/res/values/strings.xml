@@ -8,4 +8,6 @@
     <string name="name">Name</string>
     <string name="create_account">Create Account</string>
     <string name="already_a_member_login">Already a member? Login</string>
+    <string name="sign_up_fail">Could not register user.</string>
+    <string name="login_failed">Sign in failed. Please try again.</string>
 </resources>
