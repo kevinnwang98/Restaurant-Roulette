@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.apollographql.android'
 
 android {
     compileSdkVersion 28
@@ -11,10 +12,20 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField 'String', "YelpApiKey", YELP_API_KEY
+            resValue 'string', "yelp_api_key", YELP_API_KEY
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "YelpApiKey", YELP_API_KEY
+            resValue 'string', "yelp_api_key", YELP_API_KEY
         }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 }
 
@@ -36,6 +47,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     // Android Jetpack
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    // Apollo
+    implementation 'com.apollographql.apollo:apollo-runtime:1.0.0-alpha3'
+    //RxPermissions
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
 }
 
 apply plugin: 'com.google.gms.google-services'
