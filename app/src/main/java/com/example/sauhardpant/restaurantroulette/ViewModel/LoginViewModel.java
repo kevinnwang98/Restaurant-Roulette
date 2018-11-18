@@ -43,6 +43,7 @@ public class LoginViewModel extends ViewModel {
                         if (task.isSuccessful()) {
                             loggedIn.postValue(true);
                         } else {
+                            Log.d(TAG, "onComplete: " + task.getException());
                             loggedIn.postValue(false);
                         }
                     }
