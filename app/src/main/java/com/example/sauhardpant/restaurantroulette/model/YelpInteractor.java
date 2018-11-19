@@ -53,7 +53,7 @@ public class YelpInteractor {
                 .build()).enqueue(new ApolloCall.Callback<SearchYelpQuery.Data>() {
             @Override
             public void onResponse(@NotNull com.apollographql.apollo.api.Response<SearchYelpQuery.Data> response) {
-                for (int i = 0; i < response.data().search().total(); i++) {
+                for (int i = 0; i < response.data().search().business().size(); i++) {
                     Log.d(TAG, i + " =======>>>> " + response.data().search().business().get(i).name());
                 }
             }

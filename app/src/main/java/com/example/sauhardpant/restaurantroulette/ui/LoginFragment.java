@@ -84,7 +84,7 @@ public class LoginFragment extends Fragment {
                     progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     progressBar.show();
                 } else {
-                    progressBar.hide();
+                    progressBar.dismiss();
                 }
             }
         });
