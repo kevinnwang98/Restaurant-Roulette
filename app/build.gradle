@@ -49,8 +49,10 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     // Apollo
     implementation 'com.apollographql.apollo:apollo-runtime:1.0.0-alpha3'
-    //RxPermissions
+    // RxPermissions
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/business_image"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="6dip"
+        android:contentDescription="TODO"
+        android:src="@android:drawable/btn_plus" />
+
+    <TextView
+        android:id="@+id/business_name"
+        android:layout_width="fill_parent"
+        android:layout_height="26dip"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@id/business_image"
+        android:textColor="@android:color/black"
+        android:singleLine="true"
+        android:text="Description"
+        android:textSize="12sp"
+        android:layout_toRightOf="@id/business_image"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
