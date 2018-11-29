@@ -64,7 +64,7 @@ public class BusinessResultsListViewFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<SearchYelpQuery.Business> businesses) {
                 for (int i = 0; i < businesses.size(); i++) {
-                    Log.d(TAG, "This is from guess where: " + businesses.get(i).name() + "\n");
+                    Log.d(TAG, "This is from guess where: " + businesses.get(i) + "\n");
                     businessList = businesses;
                     resultsListView.setAdapter(new ResultsAdapter());
                 }
