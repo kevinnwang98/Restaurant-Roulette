@@ -1,28 +1,54 @@
 package com.example.sauhardpant.restaurantroulette.ViewModel;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MediatorLiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.apollographql.apollo.yelp.SearchYelpQuery;
+import com.example.sauhardpant.restaurantroulette.ViewModel.Utils.BusinessResultListener;
 import com.example.sauhardpant.restaurantroulette.model.YelpInteractor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BaseResultsViewModel extends ViewModel {
     private static final String TAG = BaseResultsViewModel.class.getSimpleName();
     private static final long MIN_TIME = 60000; // update every minute
     private static final float MIN_DISTANCE = 500; // update every 500m
 
+    private MutableLiveData<Location> userLocation = new MutableLiveData<>();
+    private MediatorLiveData<List<SearchYelpQuery.Business>> businessList = new MediatorLiveData<>();
+    private MediatorLiveData<Boolean> testLiveData = new MediatorLiveData<>();
+
     private Context mContext;
-    private Location mUserLocation;
     private YelpInteractor interactor;
 
     public void init(Context context) {
         this.mContext = context;
         interactor = new YelpInteractor();
+
+        linkMediatorSources();
+    }
+
+    @NonNull
+    public LiveData<Location> getLocation() {
+        return userLocation;
+    }
+
+    @NonNull
+    public LiveData<List<SearchYelpQuery.Business>> getBusinessList() {
+        return businessList;
     }
 
     @SuppressLint("MissingPermission")
@@ -32,7 +58,7 @@ public class BaseResultsViewModel extends ViewModel {
         LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                interactor.getNearbyRestaurants(location);
+                userLocation.postValue(location);
             }
 
             @Override
@@ -51,6 +77,27 @@ public class BaseResultsViewModel extends ViewModel {
             }
         };
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME, MIN_DISTANCE, locationListener);
+    }
+
+    private void linkMediatorSources() {
+        businessList.addSource(userLocation, new Observer<Location>() {
+            @Override
+            public void onChanged(@Nullable Location location) {
+                interactor.getNearbyRestaurants(location, new BusinessResultListener() {
+                    @Override
+                    public void onResult(List businesses) {
+                        for (int i = 0; i < businesses.size(); i++) {
+                            businessList.postValue(businesses);
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+                        Log.d(TAG, "onError: Something went wrong with fetching business data");
+                    }
+                });
+            }
+        });
     }
 
 
