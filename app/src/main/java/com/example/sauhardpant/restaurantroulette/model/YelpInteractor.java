@@ -1,6 +1,5 @@
 package com.example.sauhardpant.restaurantroulette.model;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.location.Location;
 import android.util.Log;
 
@@ -9,7 +8,7 @@ import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.exception.ApolloException;
 import com.apollographql.apollo.yelp.SearchYelpQuery;
 import com.example.sauhardpant.restaurantroulette.BuildConfig;
-import com.example.sauhardpant.restaurantroulette.ViewModel.Utils.BusinessResultListener;
+import com.example.sauhardpant.restaurantroulette.ViewModel.Interfaces.BusinessResultListener;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -60,9 +59,7 @@ public class YelpInteractor {
             public void onResponse(@NotNull com.apollographql.apollo.api.Response<SearchYelpQuery.Data> response) {
                 List<SearchYelpQuery.Business> businesses = new ArrayList<>();
                 if (response.data() != null) {
-                    for (int i = 0; i < response.data().search().business().size(); i++) {
-                        businesses.add(response.data().search().business().get(i));
-                    }
+                    businesses.addAll(response.data().search().business());
                 }
                 callback.onResult(businesses);
             }
