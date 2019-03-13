@@ -16,13 +16,13 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.apollographql.apollo.yelp.SearchYelpQuery;
-import com.example.sauhardpant.restaurantroulette.ViewModel.Utils.BusinessResultListener;
+import com.example.sauhardpant.restaurantroulette.ViewModel.Interfaces.BusinessResultListener;
+import com.example.sauhardpant.restaurantroulette.ViewModel.Interfaces.CustomBottomNavClickListener;
 import com.example.sauhardpant.restaurantroulette.model.YelpInteractor;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class BaseResultsViewModel extends ViewModel {
+public class BaseResultsViewModel extends ViewModel implements CustomBottomNavClickListener {
     private static final String TAG = BaseResultsViewModel.class.getSimpleName();
     private static final long MIN_TIME = 60000; // update every minute
     private static final float MIN_DISTANCE = 500; // update every 500m
@@ -79,7 +79,14 @@ public class BaseResultsViewModel extends ViewModel {
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME, MIN_DISTANCE, locationListener);
     }
 
+    @Override
+    public void onBottomNavMenuClicked(String menuItem) {
+        Log.d(TAG, "onBottomNavMenuClicked: " + menuItem);
+    }
+
     private void linkMediatorSources() {
+        businessList.removeSource(userLocation);
+
         businessList.addSource(userLocation, new Observer<Location>() {
             @Override
             public void onChanged(@Nullable Location location) {

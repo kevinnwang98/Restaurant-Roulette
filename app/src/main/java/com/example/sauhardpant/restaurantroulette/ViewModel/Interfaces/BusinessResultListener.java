@@ -1,4 +1,4 @@
-package com.example.sauhardpant.restaurantroulette.ViewModel.Utils;
+package com.example.sauhardpant.restaurantroulette.ViewModel.Interfaces;
 
 import java.util.List;
 
